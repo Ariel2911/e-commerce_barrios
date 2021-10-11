@@ -1,0 +1,36 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #61dafb;  
+}
+  
+.header_title{  
+    margin-left: .5rem;
+}
+
+.logo{
+    margin-left: .5rem;
+}
+.menu{
+    display: flex;
+}
+
+.menu_list{
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    
+}
+
+.menu_home{
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: white;
+}
+
+.menu_link{
+    margin: 0 .5rem;    
+    color: inherit;
+    text-decoration: none;    
+}     
