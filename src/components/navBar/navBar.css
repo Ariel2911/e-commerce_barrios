@@ -12,6 +12,7 @@
 .logo{
     margin-left: .5rem;
 }
+
 .menu{
     display: flex;
 }
@@ -30,7 +31,7 @@
 }
 
 .menu_link{
-    margin: 0 .5rem;    
+    margin: 0 .5rem;  
     color: inherit;
     text-decoration: none;    
 }     
