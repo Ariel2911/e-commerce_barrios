@@ -9,7 +9,7 @@ function App() {
       
       <NavBar/>
 
-      <ItemListContainer greeting="Hola"/>
+      <ItemListContainer greeting="Detalles del producto"/>
       
       <main className="App-header">        
         <img src={logo} className="App-logo" alt="logo" />
