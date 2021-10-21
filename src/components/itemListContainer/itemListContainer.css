@@ -1,13 +1,11 @@
 .itemListContainer__container{  
     max-width: 200px;
 
-    padding-bottom: 1rem;
     margin: 10px auto;
 }
 
 .itemListContainer__container:hover{  
-    /* outline: 2px solid #60d9fb; */
     border-radius: 0.5rem;
 
-    box-shadow: 0 16px 52px -32px rgb(109, 149, 160);
+    box-shadow: 0 12px 20px -10px rgb(109, 149, 160);
 }
