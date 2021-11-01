@@ -1,0 +1,17 @@
+.item{
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.item__container{
+    display: flex;    
+}
+.item__img{
+    height: 400px;
+    padding-right:1rem ;
+
+}
+.item__textContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

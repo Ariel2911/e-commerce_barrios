@@ -2,12 +2,12 @@ import { useState, useEffect } from "react"
 import ItemCount from "../itemCount/itemCount"
 import ItemList from "../itemList/itemList"
 import '../itemListContainer/itemListContainer.css'
-import data from '../objProducts.json'
+import data from '../../objProducts.json'
 
 
 const ItemListContainer = ({greeting}) => {
     const onAdd = (count,stock,setCount) => {
-        count<stock && setCount(count + 1)
+        console.log("hola")
     }    
     const [productos,setProductos] = useState(null)
 
