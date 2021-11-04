@@ -1,11 +1,4 @@
-.itemListContainer__container{  
-    max-width: 200px;
-
-    margin: 10px auto;
+.itemListContainer__container{      
+    text-align: center;
 }
 
-.itemListContainer__container:hover{  
-    border-radius: 0.5rem;
-
-    box-shadow: 0 12px 20px -10px rgb(109, 149, 160);
-}

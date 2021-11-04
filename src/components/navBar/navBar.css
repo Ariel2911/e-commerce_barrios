@@ -21,14 +21,13 @@
 .menu_list{
     display: flex;
     padding-left: 0;
-    list-style: none;
-    
+    list-style: none;    
 }
 
 .menu_home{
-    padding: 0.5rem;
+    padding: .3rem .5rem;
     border-radius: 1rem;
-    background-color: white;
+    background-color: #e3e3e3;
 }
 
 .menu_link{

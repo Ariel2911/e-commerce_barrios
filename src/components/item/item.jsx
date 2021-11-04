@@ -1,14 +1,19 @@
+import { Link } from 'react-router-dom'
 import'../item/item.css'
 
 const Item = ({item}) => {
-    const {name,description,stock,pictureUrl}=item
+    const {id,name,description,stock,pictureUrl}=item
     
     return(
         <section className='card'>
             <h2>{name}</h2>
-            <img src={pictureUrl} className='image' alt="foto de insecto" />
+            <div className='card__container-img'>
+                <img src={pictureUrl} className='image' alt={`imagen de ${name} `}/>
+            </div>
             <p>{description}</p>
-            <button>Ver detalles de producto</button>
+            <Link to={`/item/${id}`}>
+                <button>Ver detalles de producto</button>                
+            </Link> 
             <p>Stock disponible: {stock}</p>
         </section>
     )

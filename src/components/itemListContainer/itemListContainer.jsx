@@ -1,37 +1,50 @@
 import { useState, useEffect } from "react"
-import ItemCount from "../itemCount/itemCount"
+import { useParams } from "react-router"
 import ItemList from "../itemList/itemList"
 import '../itemListContainer/itemListContainer.css'
 import data from '../../objProducts.json'
 
-
 const ItemListContainer = ({greeting}) => {
-    const onAdd = (count,stock,setCount) => {
-        console.log("hola")
-    }    
+    const {id}=useParams()
+    
     const [productos,setProductos] = useState(null)
+    const [category,setcategory] = useState(null)  
+    const [loading,setloading] = useState(true)  
+
+    if(category != id){
+        setcategory(id)
+        setloading(true)
+    }
 
     useEffect(() => {
-        const getData =  new Promise((resolve,reject) => {
+        setloading(true)
+        const getData =  new Promise((resolve,reject) => {            
             setTimeout(()=>{
+                setloading(false)
                 resolve(data)               
-            },2000)            
+            },2000)               
         })
 
         getData
-            .then((res) => {
-            setProductos(res)
+            .then((res) => {                
+                if(category){
+                    setProductos(res.filter(e=> e.tag==id))
+                }
+                else setProductos(res)                
             })
-            .catch((err) => console.log(err))        
-    }, [])   
+            .catch((err) => console.log(err))              
+    }, [id])  
 
-    return (
+    if(loading){
+        return <h2>Loding...</h2>
+    }
+
+    return(
         <section className='itemListContainer__container'>
-            <p>{greeting}</p>
-            <ItemCount stock={3} initial={0} onAdd={onAdd}/>
+            <h2>{greeting}</h2>
             <ItemList items={productos}/>
         </section>
-    )
+    ) 
 }
 
 export default ItemListContainer

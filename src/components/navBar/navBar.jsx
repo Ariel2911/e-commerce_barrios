@@ -1,25 +1,34 @@
+import { Link } from 'react-router-dom'
 import CartWidget from '../cartWidget/cartWidget'
 import './navBar.css'
 const NavBar=() => {
     return (
         <header className='header'>
-
-            <h1 className='header_title'>E-Commerce</h1>
-
+            <Link to='/'>
+                <h1 className='header_title'>E-Commerce</h1>
+            </Link>
             <nav className='menu'>
                 <ul className='menu_list'>
                     <li className='menu_item'>
-                        <a href="/#" className='menu_link menu_home'>Inicio</a>
+                        <Link to='/' className='menu_link menu_home'>
+                            Inicio
+                        </Link>                        
                     </li>
                     <li className='menu_item'>
-                        <a href="/#" className='menu_link'>Producos</a>
-                    </li>
+                        <Link to='/category/crema' className='menu_link'>
+                            Helados de crema
+                        </Link>                        
+                    </li>                    
                     <li className='menu_item'>
-                        <a href="/#" className='menu_link'>Novedades</a>
-                    </li>
+                        <Link to={`/category/agua`} className='menu_link'>
+                            Helados de agua
+                        </Link>                        
+                    </li>                    
                     <li className='menu_item'>
-                        <a href="/#" className='menu_link'>Contacto</a>
-                    </li>
+                        <Link to='/contact' className='menu_link'>
+                            Contacto
+                        </Link>                        
+                    </li>                    
                 </ul>
             </nav>
 

@@ -2,6 +2,7 @@
     width: 150px;
     margin: 10px auto;
 }
+
 .count__text{    
     margin: 12px 20px ;
 
@@ -10,6 +11,7 @@
 
     color: #61dafb;
 }
+
 .count__button{
     padding: 4px 12px;
     margin: 4px;

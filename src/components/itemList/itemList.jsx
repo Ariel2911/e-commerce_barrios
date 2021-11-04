@@ -3,7 +3,7 @@ import './itemList.css'
 
 const ItemList = ({items}) => {
     return(
-        <ul>
+        <ul className='listContainer'>
             {
                 items ? items.map((item) =>{
                     return(

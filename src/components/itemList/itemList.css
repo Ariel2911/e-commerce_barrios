@@ -1,4 +1,6 @@
-ul{
-    padding: 0;
-    list-style: none;
+.listContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,230px);
+    place-content: center;
+    gap: 20px;
 }
