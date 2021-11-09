@@ -1,7 +1,12 @@
+import { useState } from 'react/cjs/react.development'
 import ItemCount from '../itemCount/itemCount'
 import './itemDetail.css'
 
 const ItemDetail = ({item})=>{
+    const[add,setAdd]=useState(0)
+    const onAdd=(value)=>{
+        setAdd(value)
+    }
     
     return(
         <article className='item'>
@@ -13,8 +18,7 @@ const ItemDetail = ({item})=>{
 
                     <p>Precio ${item.price}</p>
                     <div>
-                        <ItemCount stock={item.stock} initial={0} />
-                        {/* <p>Stock: {item.stock}</p> */}
+                        <ItemCount stock={item.stock} initial={0} onAdd={onAdd} />
                     </div>
 
                 </div>

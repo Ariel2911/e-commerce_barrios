@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import ItemList from "../itemList/itemList"
-import '../itemListContainer/itemListContainer.css'
+import './itemListContainer.css'
 import data from '../../objProducts.json'
 
 const ItemListContainer = ({greeting}) => {
@@ -11,7 +11,7 @@ const ItemListContainer = ({greeting}) => {
     const [category,setcategory] = useState(null)  
     const [loading,setloading] = useState(true)  
 
-    if(category != id){
+    if(category !== id){
         setcategory(id)
         setloading(true)
     }
@@ -28,12 +28,12 @@ const ItemListContainer = ({greeting}) => {
         getData
             .then((res) => {                
                 if(category){
-                    setProductos(res.filter(e=> e.tag==id))
+                    setProductos(res.filter(e=> e.tag===id))
                 }
                 else setProductos(res)                
             })
             .catch((err) => console.log(err))              
-    }, [id])  
+    }, [id, category])  
 
     if(loading){
         return <h2>Loding...</h2>

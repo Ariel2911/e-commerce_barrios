@@ -6,7 +6,7 @@ import data from '../../objProducts.json'
 const ItemDetailContainer = ()=>{
     const [item,setItem]=useState(null)
     const {id}=useParams()
-    console.log(id)
+    
     useEffect(() => {
         const getItem= new Promise((resolve)=>{
             setTimeout(()=>{
