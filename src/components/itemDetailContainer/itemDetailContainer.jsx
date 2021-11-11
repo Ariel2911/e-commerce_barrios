@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
+
 import ItemDetail from "../itemDetail/itemDetail"
+import Loading from "../loading/loading"
+
 import data from '../../objProducts.json'
 
 const ItemDetailContainer = ()=>{
@@ -19,11 +22,12 @@ const ItemDetailContainer = ()=>{
             .then(response=>{
                 setItem(...response.filter(items=>items.id===id))
             })
-    }, [id])    
+    }, [id])
+    
     
     return(
         item ? <ItemDetail item={item}/>
-        : <h2>Loading...</h2> 
+        : <Loading/> 
     )
 }
 

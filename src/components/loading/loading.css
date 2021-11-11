@@ -1,0 +1,10 @@
+.loading__icon{
+    position: absolute;
+    left: 50vw;
+    transform: translateX(-50%);
+    top: 50vh;
+    display: block;
+    
+    width: 100px;
+    height: auto;
+}

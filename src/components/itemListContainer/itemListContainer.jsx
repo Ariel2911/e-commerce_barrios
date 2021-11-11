@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
+
 import ItemList from "../itemList/itemList"
-import './itemListContainer.css'
+import Loading from "../loading/loading"
+
 import data from '../../objProducts.json'
+import './itemListContainer.css'
 
 const ItemListContainer = ({greeting}) => {
     const {id}=useParams()
@@ -36,9 +39,9 @@ const ItemListContainer = ({greeting}) => {
     }, [id, category])  
 
     if(loading){
-        return <h2>Loding...</h2>
+        return <Loading/>
     }
-
+    
     return(
         <section className='itemListContainer__container'>
             <h2>{greeting}</h2>

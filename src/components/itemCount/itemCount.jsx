@@ -12,11 +12,13 @@ const ItemCount=({ stock, initial, onAdd }) => {
         setAvailible(available+1)
       }      
     } 
+    
     const addCart = () => {      
       onAdd(count)
       setAvailible(available)
       setCount(0)
     }
+
     const Increase = ()=> {
       if(available>0){
         setCount(count + 1)

@@ -23,3 +23,24 @@
     justify-content: space-around;
     max-width: 500px;
 }
+
+.item__button-finished{
+    padding: 4px 12px;
+    margin: 4px;
+    border: 1px solid #61dafb;
+    border-radius: .5rem;     
+    
+    cursor: pointer;
+    box-shadow: 0 4px 12px -8px rgb(109, 149, 160);
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    background-color: #61dafb;
+    color: #282c34;
+}
+
+.item__button-finished:hover {   
+    background-color: white; 
+    border-color: #61dafb;
+}
