@@ -1,8 +1,20 @@
-import cart from './05carrito.svg'
+import { Link } from 'react-router-dom'
+//context
+import {useCart} from '../../context/cartContext';
+//files
+import cartWidget from './05carrito.svg'
+import './cartWidget.css'
 
 const CartWidget = () =>{
+    const {quantityCart}=useCart()  
+
     return(
-        <img src={cart} className='cart__icon' alt="cart" />
+        <Link to={'/cart'}>
+            <div className='cartWidget__container'>
+                <img src={cartWidget} className='cartWidget__icon' alt="carrito de compras" />
+                <span className='cartWidget__number'>{quantityCart}</span>
+            </div>
+        </Link>
     )
 }
 

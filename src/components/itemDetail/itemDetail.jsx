@@ -1,19 +1,15 @@
-import { useState } from 'react/cjs/react.development'
 import { Link } from 'react-router-dom'
-
+//componets
 import ItemCount from '../itemCount/itemCount'
 import {useCart} from '../../context/cartContext';
-
+//files
 import './itemDetail.css'
 
 const ItemDetail = ({item})=>{   
     const {addItem} = useCart()  
-    const[add,setAdd]=useState(0)
 
     const onAdd=(quantity)=>{
         if(quantity !== 0) {
-            setAdd(quantity)        
-            
             addItem(item,quantity)
         }
     }
@@ -25,7 +21,6 @@ const ItemDetail = ({item})=>{
                 <img className='item__img' src={item.pictureUrl} alt={item.description} />
                 <div className='item__textContainer'>
                     <p className='item__descirption'>{item.largeDescription}</p>
-
                     <p>Precio ${item.price}</p>
                     <div>
                         <ItemCount stock={item.stock} initial={0} onAdd={onAdd} />
@@ -33,11 +28,9 @@ const ItemDetail = ({item})=>{
                     <Link to='/cart'>
                         <button className='item__button-finished'>Terminar mi compra</button>                
                     </Link> 
-
                 </div>
             </div>
-        </article>
-        
+        </article>        
     )
 }
 

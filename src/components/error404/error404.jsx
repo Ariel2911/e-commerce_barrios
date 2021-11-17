@@ -1,7 +1,7 @@
 
 const Error404=()=>{
     return(
-        <h2>Error 404</h2>
+        <h2>¡Ups! La página no existe</h2>
     )
 }
 

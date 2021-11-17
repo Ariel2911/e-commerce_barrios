@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
-
+//components
 import ItemDetail from "../itemDetail/itemDetail"
 import Loading from "../loading/loading"
-
+//files
 import data from '../../objProducts.json'
 
 const ItemDetailContainer = ()=>{
@@ -13,8 +13,7 @@ const ItemDetailContainer = ()=>{
     useEffect(() => {
         const getItem= new Promise((resolve)=>{
             setTimeout(()=>{
-                resolve(data)
-                
+                resolve(data)                
             },2000)
         })
 
@@ -22,8 +21,7 @@ const ItemDetailContainer = ()=>{
             .then(response=>{
                 setItem(...response.filter(items=>items.id===id))
             })
-    }, [id])
-    
+    }, [id])    
     
     return(
         item ? <ItemDetail item={item}/>

@@ -7,37 +7,39 @@ export const useCart = ()=> useContext(CartContext);
 
 export const CartProvider = ({children})=>{
     const[cart,setCart] = useState([])
+    const[arrId,setArrId] = useState([])
+    const[quantityCart,setQuantityCart] = useState(0)
 
     const addItem = (item,quantity)=>{
-
-        const ids=cart.map(item=>item.id)
-
-        if(!ids.includes(item.id)){
-            item.quantity=quantity
+        if(!isInCart(item.id))  {
             setCart([...cart,item])
+            item.quantity=0
         }
-        else {
-            item.quantity+=quantity
-            setCart([...cart])
-        }
-    }    
-    const removeItem = itemId =>{
-        setCart(
-            cart.filter(item=> item.id !== itemId)
-        )
-    }    
-    const clear = ()=>{
-        setCart([])
-    
-    }    
-    const isInCart = (id)=>{
-    
-    }
+        item.quantity+=quantity
+        setQuantityCart(quantityCart + quantity)
+    }  
 
-    console.log(cart)
-    
+    const removeItem = (itemId,itemQuantity) =>{
+        setCart( cart.filter(item=> item.id !== itemId) )
+        setQuantityCart(quantityCart - itemQuantity)
+        setArrId( arrId.filter(id=>id!==itemId))
+    } 
+
+    const clear = ()=>{ 
+        setCart([]) 
+        setQuantityCart(0)
+        setArrId([])
+    } 
+
+    const isInCart = (id)=>{
+        if(arrId.includes(id)) return true
+
+        setArrId([...arrId,id])
+        return false
+    }
+        
     return(
-        <CartContext.Provider value={{cart, addItem,removeItem,clear,isInCart}}>
+        <CartContext.Provider value={{cart,addItem,removeItem,clear,isInCart,quantityCart}}>
             {children}
         </CartContext.Provider>        
     ) 

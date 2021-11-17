@@ -1,0 +1,27 @@
+.cart__container{
+    padding: 10px;
+}
+.cart__container-item--head{
+    font-size: 20px;
+    font-weight: bold;
+}
+.cart__container-item{
+    display: grid;
+    gap: 16px;
+    place-items: center;
+    justify-self: center;
+    grid-template-columns: 64px 80px 1fr 1fr 1fr 1fr;
+
+    margin: 16px 0;
+}
+.cart__item{
+    margin: 0 auto;
+}
+.cart__image{
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
+.cart__total{
+    font-size: 24px;
+}

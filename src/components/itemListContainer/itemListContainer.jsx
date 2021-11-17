@@ -38,11 +38,11 @@ const ItemListContainer = ({greeting}) => {
             .catch((err) => console.log(err))              
     }, [id, category])  
 
-    if(loading){
-        return <Loading/>
-    }
+    
     
     return(
+        loading ?  <Loading/> 
+        :
         <section className='itemListContainer__container'>
             <h2>{greeting}</h2>
             <ItemList items={productos}/>
