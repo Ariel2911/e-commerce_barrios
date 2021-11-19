@@ -3,24 +3,21 @@ import { useParams } from "react-router"
 //components
 import ItemDetail from "../itemDetail/itemDetail"
 import Loading from "../loading/loading"
-//files
-import data from '../../objProducts.json'
+//firebase
+import { db } from "../../firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const ItemDetailContainer = ()=>{
     const [item,setItem]=useState(null)
     const {id}=useParams()
     
-    useEffect(() => {
-        const getItem= new Promise((resolve)=>{
-            setTimeout(()=>{
-                resolve(data)                
-            },2000)
-        })
+    useEffect(() => {       
+        const queryDB = query(collection(db, "items"), where("id", "==", id));
+        const getItem = getDocs(queryDB)
 
-        getItem
-            .then(response=>{
-                setItem(...response.filter(items=>items.id===id))
-            })
+        getItem.then(data=>{         
+            setItem(...data.docs.map(doc=>doc.data()))
+        })
     }, [id])    
     
     return(

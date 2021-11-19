@@ -11,13 +11,21 @@ export const CartProvider = ({children})=>{
     const[quantityCart,setQuantityCart] = useState(0)
 
     const addItem = (item,quantity)=>{
-        if(!isInCart(item.id))  {
-            setCart([...cart,item])
-            item.quantity=0
+        
+        if(!arrId.includes(item.id)){
+            setArrId([...arrId,item.id])
+            setCart([...cart,[item,quantity]])
         }
-        item.quantity+=quantity
+        else{
+            cart.forEach(element => {
+                if(element[0].id===item.id){
+                    element[1]+=quantity
+                }
+            });
+        }
+        
         setQuantityCart(quantityCart + quantity)
-    }  
+    }    
 
     const removeItem = (itemId,itemQuantity) =>{
         setCart( cart.filter(item=> item.id !== itemId) )
@@ -31,15 +39,9 @@ export const CartProvider = ({children})=>{
         setArrId([])
     } 
 
-    const isInCart = (id)=>{
-        if(arrId.includes(id)) return true
-
-        setArrId([...arrId,id])
-        return false
-    }
-        
+            
     return(
-        <CartContext.Provider value={{cart,addItem,removeItem,clear,isInCart,quantityCart}}>
+        <CartContext.Provider value={{cart,addItem,removeItem,clear,quantityCart}}>
             {children}
         </CartContext.Provider>        
     ) 

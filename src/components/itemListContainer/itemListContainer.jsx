@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router"
-
+//components
 import ItemList from "../itemList/itemList"
 import Loading from "../loading/loading"
-
-import data from '../../objProducts.json'
+//files
 import './itemListContainer.css'
+//firebase
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const ItemListContainer = ({greeting}) => {
     const {id}=useParams()
@@ -20,22 +22,16 @@ const ItemListContainer = ({greeting}) => {
     }
 
     useEffect(() => {
-        setloading(true)
-        const getData =  new Promise((resolve,reject) => {            
-            setTimeout(()=>{
-                setloading(false)
-                resolve(data)               
-            },2000)               
-        })
+        const getData = getDocs(collection(db, "items"))
 
-        getData
-            .then((res) => {                
-                if(category){
-                    setProductos(res.filter(e=> e.tag===id))
-                }
-                else setProductos(res)                
-            })
-            .catch((err) => console.log(err))              
+        getData.then(data=>{          
+            setloading(false)
+            const res=data.docs.map(doc=>doc.data())
+              if(category){
+                  setProductos(res.filter(e=> e.tag===id))
+              }
+              else setProductos(res)
+            })                     
     }, [id, category])  
 
     

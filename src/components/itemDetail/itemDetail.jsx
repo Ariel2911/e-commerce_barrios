@@ -5,7 +5,8 @@ import {useCart} from '../../context/cartContext';
 //files
 import './itemDetail.css'
 
-const ItemDetail = ({item})=>{   
+const ItemDetail = ({item})=>{ 
+    const{name,littleDescription,longDescription,pictureUrl,price}=item  
     const {addItem} = useCart()  
 
     const onAdd=(quantity)=>{
@@ -16,12 +17,12 @@ const ItemDetail = ({item})=>{
 
     return(
         <article className='item'>
-            <h2 className='item__title'> {item.name} </h2> 
+            <h2 className='item__title'> {name} </h2> 
             <div className='item__container'>
-                <img className='item__img' src={item.pictureUrl} alt={item.description} />
+                <img className='item__img' src={pictureUrl} alt={littleDescription} />
                 <div className='item__textContainer'>
-                    <p className='item__descirption'>{item.largeDescription}</p>
-                    <p>Precio ${item.price}</p>
+                    <p className='item__descirption'>{longDescription}</p>
+                    <p>Precio ${price}</p>
                     <div>
                         <ItemCount stock={item.stock} initial={0} onAdd={onAdd} />
                     </div>

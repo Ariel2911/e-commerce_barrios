@@ -12,7 +12,7 @@ const ItemList = ({items}) => {
                         </li>
                     )
                 }) 
-                : <h2>Loading...</h2>               
+                : <h2>El item no existe</h2>               
             }
         </ul>
     )
