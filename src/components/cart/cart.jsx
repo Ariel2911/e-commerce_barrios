@@ -7,8 +7,6 @@ import './cart.css';
 const Cart =()=>{
     const {cart,removeItem,clear}=useCart()
     
-    // console.log(cart.length)
-
     let acum=0
     if(cart.length === 0){
         return(
@@ -30,26 +28,31 @@ const Cart =()=>{
                     <span>Precio</span>
                     <span>cantidad</span>
                     <span>Total</span>
-                    <button onClick={clear}>Eliminar todo</button>
+                    <button className='btn' onClick={clear}>Eliminar todo</button>
                 </li>
                 {
-                    cart?.map(item=>{
-                        acum+=item[1]*item[0].price
+                    cart?.map(cartItem=>{
+                        const {item,quantity}=cartItem
+                        
+                        acum+=quantity * item.price
 
-                        return(
-                            <li className='cart__container-item' key={item[0].id}>
-                                <img src={item[0].pictureUrl} className='cart__image' alt={`imagen de ${item.name} `}/>
-                                <span className='cart__item'>{item[0].name}</span>
-                                <span className='cart__item'>{item[0].price}</span>
-                                <span className='cart__item'>{item[1]}</span>
-                                <span className='cart__item'>{item[1]*item[0].price}</span>
-                                <button onClick={()=>removeItem(item[0].id,item[1])}>Eliminar</button>
+                        return(                            
+                            <li className='cart__container-item' key={item.id}>
+                                <img src={item.pictureUrl} className='cart__image' alt={`imagen de ${item.name} `}/>
+                                <span className='cart__item'>{item.name}</span>
+                                <span className='cart__item'>{item.price}</span>
+                                <span className='cart__item'>{quantity}</span>
+                                <span className='cart__item'>{quantity * item.price}</span>
+                                <button onClick={()=>removeItem(item.id,quantity)}>Eliminar</button>
                             </li>
                         )
                     })                    
                 }
             </ul>
-            <p className='cart__total'>Total:  ${acum}</p>            
+            <p className='cart__total'>Total:  ${acum}</p>    
+            <Link to='/reservationForm'>
+                <button className='cart__bnt-finish btn'>Terminar la compra</button>                
+            </Link>        
         </div>
     )
 }

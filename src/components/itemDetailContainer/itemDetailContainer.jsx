@@ -11,15 +11,16 @@ const ItemDetailContainer = ()=>{
     const [item,setItem]=useState(null)
     const {id}=useParams()
     
-    useEffect(() => {       
+    useEffect(() => {
         const queryDB = query(collection(db, "items"), where("id", "==", id));
         const getItem = getDocs(queryDB)
 
         getItem.then(data=>{         
-            setItem(...data.docs.map(doc=>doc.data()))
+            setItem(...data.docs.map(doc=>doc.data()))            
         })
+        
     }, [id])    
-    
+
     return(
         item ? <ItemDetail item={item}/>
         : <Loading/> 

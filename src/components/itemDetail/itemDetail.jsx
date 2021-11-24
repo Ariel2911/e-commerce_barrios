@@ -1,16 +1,22 @@
 import { Link } from 'react-router-dom'
 //componets
 import ItemCount from '../itemCount/itemCount'
+//context
 import {useCart} from '../../context/cartContext';
 //files
 import './itemDetail.css'
 
-const ItemDetail = ({item})=>{ 
-    const{name,littleDescription,longDescription,pictureUrl,price}=item  
-    const {addItem} = useCart()  
+let available=5
 
+const ItemDetail = ({item})=>{  
+    const{id,name,littleDescription,longDescription,pictureUrl,price,stock}=item 
+    const {addItem,getItemStock} = useCart() 
+
+    getItemStock(id)? available=(getItemStock(id).stock) : available=stock    
+    
     const onAdd=(quantity)=>{
-        if(quantity !== 0) {
+        
+        if(quantity !== 0) {            
             addItem(item,quantity)
         }
     }
@@ -24,10 +30,10 @@ const ItemDetail = ({item})=>{
                     <p className='item__descirption'>{longDescription}</p>
                     <p>Precio ${price}</p>
                     <div>
-                        <ItemCount stock={item.stock} initial={0} onAdd={onAdd} />
+                        <ItemCount stock={available} initial={0} onAdd={onAdd} />
                     </div>
                     <Link to='/cart'>
-                        <button className='item__button-finished'>Terminar mi compra</button>                
+                        <button className='btn'>Ir al Carrito</button>                
                     </Link> 
                 </div>
             </div>

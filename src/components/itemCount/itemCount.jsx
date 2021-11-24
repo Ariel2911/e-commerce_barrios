@@ -6,7 +6,7 @@ const ItemCount=({ stock, initial, onAdd }) => {
 
     const [count,setCount]=useState(initial) 
     const [available,setAvailible]=useState(stock)
-
+    
     const Decrease = () => {
       if(count>0){
         setCount(count - 1)

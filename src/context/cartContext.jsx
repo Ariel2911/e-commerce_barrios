@@ -6,42 +6,58 @@ const CartContext =createContext();
 export const useCart = ()=> useContext(CartContext);
 
 export const CartProvider = ({children})=>{
-    const[cart,setCart] = useState([])
-    const[arrId,setArrId] = useState([])
-    const[quantityCart,setQuantityCart] = useState(0)
+
+    const[cart,setCart] = useState([])//almacena los datos de los items agrwegados al carrito
+    const[arrIds,setArrIds] = useState([])//almacena el id de cada item agregado al carrito
+    const[quantityCart,setQuantityCart] = useState(0)//almacena la cantidad de cada item
 
     const addItem = (item,quantity)=>{
         
-        if(!arrId.includes(item.id)){
-            setArrId([...arrId,item.id])
-            setCart([...cart,[item,quantity]])
+        if(!arrIds.includes(item.id)){
+            setArrIds([...arrIds,item.id])
+
+            setCart(
+                [...cart, {item:item, quantity:quantity, stock:item.stock-quantity} ] 
+            )
         }
         else{
-            cart.forEach(element => {
-                if(element[0].id===item.id){
-                    element[1]+=quantity
+            setCart(cart.filter(element => {
+                if(element.item.id === item.id){
+                    element.quantity+=quantity
+                    element.stock-=quantity
                 }
-            });
-        }
-        
+                return element
+            }))
+        }      
         setQuantityCart(quantityCart + quantity)
-    }    
+    }  
 
-    const removeItem = (itemId,itemQuantity) =>{
-        setCart( cart.filter(item=> item.id !== itemId) )
+    const getItemQuantity = (itemId) => {
+        const [item] = cart.filter(element => element.item.id === itemId)
+        return item.quantity
+    }
+    const getItemStock = (itemId) => {
+        const [qwert] = cart.filter(element => element.item.id === itemId)
+        
+        return qwert
+    }
+
+    const removeItem = (itemId,itemQuantity) =>{   
+        
+        setCart( cart.filter(element=> element.item.id !== itemId) )
+
         setQuantityCart(quantityCart - itemQuantity)
-        setArrId( arrId.filter(id=>id!==itemId))
+        setArrIds( arrIds.filter(id=>id!==itemId))
     } 
 
     const clear = ()=>{ 
         setCart([]) 
         setQuantityCart(0)
-        setArrId([])
+        setArrIds([])
     } 
 
-            
     return(
-        <CartContext.Provider value={{cart,addItem,removeItem,clear,quantityCart}}>
+        <CartContext.Provider value={ { cart,addItem,removeItem,clear,quantityCart,getItemQuantity,getItemStock } }>
             {children}
         </CartContext.Provider>        
     ) 

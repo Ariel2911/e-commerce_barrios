@@ -3,7 +3,7 @@ import { useParams } from "react-router"
 //components
 import ItemList from "../itemList/itemList"
 import Loading from "../loading/loading"
-//files
+//styles
 import './itemListContainer.css'
 //firebase
 import { db } from "../../firebase";
@@ -23,22 +23,21 @@ const ItemListContainer = ({greeting}) => {
 
     useEffect(() => {
         const getData = getDocs(collection(db, "items"))
-
-        getData.then(data=>{          
+    
+        getData.then(data=>{        
             setloading(false)
             const res=data.docs.map(doc=>doc.data())
-              if(category){
-                  setProductos(res.filter(e=> e.tag===id))
-              }
-              else setProductos(res)
-            })                     
-    }, [id, category])  
+                if(category){
+                    setProductos(res.filter(e=> e.tag===id))
+                }
+                else setProductos(res)  
+            })     
 
-    
+    }, [id, category])  
     
     return(
         loading ?  <Loading/> 
-        :
+        : 
         <section className='itemListContainer__container'>
             <h2>{greeting}</h2>
             <ItemList items={productos}/>

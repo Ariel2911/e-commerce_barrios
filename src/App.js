@@ -5,7 +5,8 @@ import ItemListContainer from './components/itemListContainer/itemListContainer'
 import ItemDetailContainer from './components/itemDetailContainer/itemDetailContainer';
 import Contact from './components/contact/contact';
 import Cart from './components/cart/cart';
-import Error404 from './components/error404/error404';
+import ReservationForm from './components/reservationForm/reservationForm';
+import E404 from './components/e404/e404';
 //context
 import {CartProvider} from './context/cartContext';
 
@@ -39,8 +40,12 @@ function App() {
               <Cart/>
             </Route>  
 
+            <Route exact path='/reservationForm'>
+              <ReservationForm/>
+            </Route>  
+
             <Route>
-              <Error404/>
+              <E404/>
             </Route>  
 
           </Switch>

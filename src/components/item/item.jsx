@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom'
+//context
+import {useCart} from '../../context/cartContext';
+//styles
 import'./item.css'
 
+let available=0
+
 const Item = ({item}) => {
-    const {id,name,description,stock,pictureUrl}=item
+    const {id,name,littleDescription,stock,pictureUrl}=item
+    const {getItemStock} = useCart() 
+
+    getItemStock(id)? available=(getItemStock(id).stock) : available=stock
     
     return(
         <section className='card'>
@@ -10,11 +18,11 @@ const Item = ({item}) => {
             <div className='card__container-img'>
                 <img src={pictureUrl} className='image' alt={`imagen de ${name} `}/>
             </div>
-            <p>{description}</p>
+            <p>{littleDescription}</p>
             <Link to={`/item/${id}`}>
-                <button>Ver detalles de producto</button>                
+                <button className='btn'>Ver detalles</button>                
             </Link>             
-            <p>Stock disponible: {stock}</p>
+            <p>Stock disponible: {available}</p>
         </section>
     )
 }
