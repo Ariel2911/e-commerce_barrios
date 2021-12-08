@@ -1,89 +1,82 @@
-import { addDoc, collection, getDocs, doc, updateDoc } from "@firebase/firestore";
-import { useState } from "react"
+import { useState } from "react";
 //context
 import {useCart} from '../../context/cartContext';
-//firebase
-import { db } from "../../firebase/index";
+//components
+import Loading from "../loading/loading";
+//styles
+import './reservationForm.css';
+//
+import { checkForError } from './formValidation';
+import { createOrder, updateStock } from './updateStock';
 
-const ReservationForm = ()=>{
-    const[buyer,setBuyer]=useState({})
-    const {cart,clear} = useCart() 
+const ReservationForm = ({enterData, fun})=>{
+    const[buyer,setBuyer] = useState({name:'',phone:'',email:''});//contiene los datos del comprador
+    const[disabledSubmit,setDisabledSubmit] = useState(false);//habilita o deshabilita el boton "enviar"
+    const[error,setError] = useState({name:'',phone:'',email:''});//contiene los mensajes de error del formulario
+    const[errorMessaee,setErrorMesage] = useState(false);//contiene un aviso para el usuario
+    const [loading,setloading] = useState(false); 
 
-
-    const date = new Date().toLocaleString()
-
-    const itemUpdate= cart.map(element=>{
-        return {
-            id:element.item.id,
-            stock:element.stock
-        }                
-    })
+    const {cart,clear} = useCart();
     
-    const handleChange = (element)=>{
-        setBuyer( { ...buyer,[element.target.id]: element.target.value } )
-    }
-   
-    const handleSubmit = (event)=>{
-        event.preventDefault()
+    const handleChange = (event)=>{
+        const value = event.target.value;
+        const id = event.target.id;
+        setBuyer({...buyer,[id]:value});                      
+    };   
+    const handleSubmit = async (event)=>{
+        event.preventDefault();
 
-        const order={
-            buyer:buyer,
-            date:date,
-            items:cart
-        }      
-        const orderCollection = collection(db,"order")
+        const listOfErrors = checkForError(buyer);//crea un array con los errores detectados en el formulario
+        setError(listOfErrors);
+        if(Object.keys(listOfErrors).length > 0) return setErrorMesage(true);
+        setErrorMesage(false);
+        setDisabledSubmit(true);
+        setloading(true);
 
-        addDoc(orderCollection,order).then (({id})=>console.log(id))
+        fun(await createOrder(buyer, cart));
 
-        updateStock() 
-
-        clear()
-    }
-
-    const updateStock = () => {
-        const getData = getDocs(collection(db, "items"))
-    
-        getData.then(data=>{
-            data.docs.forEach(element=>{
-                itemUpdate.forEach(elementt => {
-                    if(elementt.id===element.data().id){
-                        const washingtonRef = doc(db, "items", element.id);
-                
-                        updateDoc(washingtonRef, {
-                            stock: elementt.stock
-                        });
-                    } 
-                });
-            })
-        }) 
-    } 
-
-    
-
+        setBuyer({name:'',phone:'',email:''});//borra el formulario
+        updateStock(cart);//actueliza el stock en la base de datos
+        clear();//Borra los articulos del carrito
+    };
+    const inputs = [
+        {
+            label:"Nombre",
+            id:"name"
+        },
+        {
+            label:"Teléfono",
+            id:"phone"
+        },
+        {
+            label:"Email",
+            id:"email"
+        }
+    ];
     return(
-        <div>
-            <h1>Reserva</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre</label>
-                    <input type="text" id="name" onChange={handleChange}></input>                    
-                </div>
-                <div>
-                    <label>Teléfono</label>
-                    <input type="number" id="phone" onChange={handleChange}></input>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input type="email" id="email" onChange={handleChange}></input>
-                </div>
-                
-                <button type='submit'>Enviar</button>
-                
+        <div className={enterData}>
+            <h2>Datos del comprador</h2>
+            <form onSubmit={handleSubmit}>                
+                {inputs.map(input=>{
+                    return(
+                        <div className='reservationForm__container' key={input.id}>
+                            <label className='reservationForm__label'>{input.label}</label>
+                            <input 
+                                className='reservationForm__input'
+                                type="text" 
+                                value={buyer[input.id]} 
+                                id={input.id} 
+                                onChange={handleChange}>
+                            </input>  
+                            <p>{error[input.id]}</p>                  
+                        </div> 
+                    )
+                })}                               
+                <button className='btn' type='submit' disabled={disabledSubmit}>Enviar</button>             
             </form>
+            <p>{ errorMessaee && `Campos invalidos. Revise los datos ingresados` }</p>
+            {loading &&  <Loading/>}            
         </div>
-        
-
     )
-}
-
-export default ReservationForm
+};
+export default ReservationForm;

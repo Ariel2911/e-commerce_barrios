@@ -1,5 +1,5 @@
 .loading__icon{
-    position: absolute;
+    position: relative;
     left: 50vw;
     transform: translateX(-50%);
     top: 50vh;

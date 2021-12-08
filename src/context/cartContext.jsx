@@ -1,5 +1,4 @@
-import { createContext,useContext } from "react"
-import { useState } from "react/cjs/react.development";
+import { createContext,useContext,useState } from "react";
 
 const CartContext =createContext();
 
@@ -7,58 +6,64 @@ export const useCart = ()=> useContext(CartContext);
 
 export const CartProvider = ({children})=>{
 
-    const[cart,setCart] = useState([])//almacena los datos de los items agrwegados al carrito
-    const[arrIds,setArrIds] = useState([])//almacena el id de cada item agregado al carrito
-    const[quantityCart,setQuantityCart] = useState(0)//almacena la cantidad de cada item
+    const[cart,setCart] = useState([]);//almacena los datos de los items agregados al carrito
+    const[cartIds,setCartIds] = useState([]);//almacena el id de cada item agregado al carrito
+    const[quantityCart,setQuantityCart] = useState(0);//almacena la cantidad totel de items
 
     const addItem = (item,quantity)=>{
         
-        if(!arrIds.includes(item.id)){
-            setArrIds([...arrIds,item.id])
+        if(!cartIds.includes(item.id)){
+            setCartIds([...cartIds,item.id]);
 
-            setCart(
-                [...cart, {item:item, quantity:quantity, stock:item.stock-quantity} ] 
-            )
+            setCart( [...cart, {item:item, quantity:quantity, stock:item.stock-quantity} ] );
         }
         else{
-            setCart(cart.filter(element => {
-                if(element.item.id === item.id){
-                    element.quantity+=quantity
-                    element.stock-=quantity
+            setCart(cart.map(detail => {
+                if(detail.item.id === item.id){
+                    detail.quantity+=quantity;
+                    detail.stock-=quantity;
                 }
-                return element
-            }))
-        }      
-        setQuantityCart(quantityCart + quantity)
-    }  
+                return detail;
+            }));
+        };
+        setQuantityCart(quantityCart + quantity);
+    };  
 
-    const getItemQuantity = (itemId) => {
-        const [item] = cart.filter(element => element.item.id === itemId)
-        return item.quantity
-    }
-    const getItemStock = (itemId) => {
-        const [qwert] = cart.filter(element => element.item.id === itemId)
-        
-        return qwert
-    }
+    const totalToPay = ()=>{
+        let total=0;
+        if(cart.length>0){
+            const totalItem = cart.map(element=>element.item.price * element.quantity); 
+            total = totalItem.reduce((acum,item)=> acum+item);
+        };
+        return total;
+    };
 
-    const removeItem = (itemId,itemQuantity) =>{   
-        
-        setCart( cart.filter(element=> element.item.id !== itemId) )
+    const getStock = (item) => {
+        let cartItemStock = item.stock;
 
-        setQuantityCart(quantityCart - itemQuantity)
-        setArrIds( arrIds.filter(id=>id!==itemId))
-    } 
+        if(cartIds.includes(item.id)){
+            cart.forEach(element =>{
+                if(element.item.id === item.id) cartItemStock = element.stock               
+            });
+        };
+        return cartItemStock;
+    };
+
+    const removeItem = (itemId,itemQuantity) =>{           
+        setCart( cart.filter(element=> element.item.id !== itemId) );
+        setQuantityCart(quantityCart - itemQuantity);
+        setCartIds( cartIds.filter(id=>id!==itemId));
+    };
 
     const clear = ()=>{ 
-        setCart([]) 
-        setQuantityCart(0)
-        setArrIds([])
-    } 
+        setCart([]); 
+        setQuantityCart(0);
+        setCartIds([]);
+    }; 
 
     return(
-        <CartContext.Provider value={ { cart,addItem,removeItem,clear,quantityCart,getItemQuantity,getItemStock } }>
+        <CartContext.Provider value={ { cart,addItem,removeItem,clear,quantityCart,cartIds,getStock,totalToPay } }>
             {children}
         </CartContext.Provider>        
-    ) 
-}
+    ); 
+};

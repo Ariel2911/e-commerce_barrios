@@ -1,13 +1,12 @@
 .cartWidget__container{
     position: relative;
-
-    margin-right: 10px;
 }
+
 .cartWidget__number{
     position: absolute;
     top: 12px;
     right: -4px;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: var(--white);
 }

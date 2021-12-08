@@ -4,5 +4,4 @@ const E404=()=>{
         <h2>¡Ups! La página no existe</h2>
     )
 }
-
-export default E404
+export default E404;

@@ -7,12 +7,13 @@ import Contact from './components/contact/contact';
 import Cart from './components/cart/cart';
 import ReservationForm from './components/reservationForm/reservationForm';
 import E404 from './components/e404/e404';
+import Footer from './components/footer/footer';
 //context
 import {CartProvider} from './context/cartContext';
 
 function App() {  
   return (
-    <div className="App">
+    <div className="app">
       <CartProvider>
         <BrowserRouter>
 
@@ -24,7 +25,7 @@ function App() {
               <ItemListContainer greeting="Productos"/>
             </Route>
 
-            <Route exact path='/category/:id'>
+            <Route exact path='/category/:tag'>
               <ItemListContainer greeting="Productos"/>
             </Route>
 
@@ -49,11 +50,13 @@ function App() {
             </Route>  
 
           </Switch>
+
+          <Footer/>
         </BrowserRouter>
       </CartProvider>
 
     </div>
   );
-}
+};
 
 export default App;

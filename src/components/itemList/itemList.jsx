@@ -1,5 +1,5 @@
-import Item from '../item/item'
-import './itemList.css'
+import Item from '../item/item';
+import './itemList.css';
 
 const ItemList = ({items}) => {
     return(
@@ -16,6 +16,5 @@ const ItemList = ({items}) => {
             }
         </ul>
     )
-}
-
-export default ItemList
+};
+export default ItemList;

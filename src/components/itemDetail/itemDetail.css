@@ -1,8 +1,11 @@
+.itemDelail-container{
+    margin: 16px;
+}
 .item{
+    text-align: center;
     max-width: 1024px;
     padding: 16px;
     margin: 0 auto;
-    text-align: center;
 }
 
 .item__container{
@@ -14,17 +17,11 @@
 .item__img{
     height: 400px;
     padding-right:1rem ;
-
 }
 
-.item__textContainer{
+.item__text-container{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     max-width: 500px;
-}
-
-.item__button-finished:hover {   
-    background-color: white; 
-    border-color: #61dafb;
 }
