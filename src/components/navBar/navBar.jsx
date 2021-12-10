@@ -8,7 +8,7 @@ import './navBar.css';
 
 const NavBar=() => {
     const[active,setActive] = useState(null);
-    const handleMenu = (e)=>{
+    const handleMenu = ()=>{
         active ? setActive(null):setActive('active');
     };
     
@@ -21,7 +21,7 @@ const NavBar=() => {
             </Link>
 
             <nav className={`menu ${active}`}>
-                <ul className='menu__list' onClick={handleMenu}>
+                <ul className={`menu__list ${active}`} onClick={handleMenu}>
                     <li className='menu__item'>
                         <Link to='/' className='menu__link menu__home'>
                             Inicio

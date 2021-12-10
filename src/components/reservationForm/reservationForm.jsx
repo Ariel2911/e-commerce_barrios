@@ -55,8 +55,8 @@ const ReservationForm = ({enterData, fun})=>{
     ];
     return(
         <div className={enterData}>
-            <h2>Datos del comprador</h2>
-            <form onSubmit={handleSubmit}>                
+            <h2 className='title'>Datos del comprador</h2>
+            <form className='card' onSubmit={handleSubmit}>                
                 {inputs.map(input=>{
                     return(
                         <div className='reservationForm__container' key={input.id}>

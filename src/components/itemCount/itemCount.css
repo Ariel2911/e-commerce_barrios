@@ -9,21 +9,25 @@
     font-size: 1.5rem;
     font-weight: bold;
 
-    color: var(--ligth-blue);
+    color: var(--secondary-color);
 }
 
-.count__button{
+.count__button, .count__buttonAdd{
     padding: 4px 12px;
     margin: 4px;
-    border: 2px solid var(--ligth-blue);
+    border: 2px solid var(--primari-color-ligth);
     border-radius: .5rem;     
     
     cursor: pointer;
     box-shadow: var(--shadow);
 
-    background-color: var(--white);
+    background-color: var(--bottom-color);
 }
 
-.count__button:hover {    
-    border-color: var(--primari-color);
+.count__buttonAdd{
+    padding: 4px 32px;
+}
+
+.count__button:hover, .count__buttonAdd:hover{    
+    border-color: var(--secondary-color);
 }

@@ -2,9 +2,8 @@
     position: relative;
     left: 50vw;
     transform: translateX(-50%);
-    top: 50vh;
+    top: 25vh;
     display: block;
     
     width: 100px;
-    height: auto;
 }

@@ -22,7 +22,7 @@ const Cart =()=>{
     if(cart.length === 0){
         return(
             <div className='cart__container'>
-                <p>{ idOrder ? 'Su número de orden es:' : '¡Ups! Tu carrito esta vacío'}</p>   
+                <p className='title'>{ idOrder ? 'Código de compra:' : '¡Ups! Tu carrito esta vacío'}</p>   
                 {idOrder && <p className='cart__message'>{idOrder}</p>}                
                 <Link to={'./'}>
                     <button className='btn'>Volver al menú principal</button>
@@ -33,8 +33,8 @@ const Cart =()=>{
     return(
         <div className='cart__container'>
             <div className='cart__header'>
-                <h2>Mi carrito</h2>
-                <button className='btn' onClick={clear}>Eliminar todo</button>
+                <h2 className='title'>Mi carrito</h2>
+                <button className='btn' onClick={clear}>Vaciar</button>
             </div>
             
             <ul className='cart__list-container'>
@@ -42,14 +42,13 @@ const Cart =()=>{
                     const {item,quantity}=cartItem; 
                     return(                            
                         <li className='cart__container-item card' key={item.id}>
+                            <img src={item.pictureUrl} className='cart__item cart__image' alt={`imagen de ${item.name} `}/>                            
                             <span className='cart__item'>{item.name}</span>
-                            <button className='remove' onClick={()=>removeItem(item.id,quantity)}>X</button>
-                            <img src={item.pictureUrl} className='cart__image' alt={`imagen de ${item.name} `}/>
-                            <div className='cart__item'>
-                                <p className='cart__item-quantity'> Cant: {quantity}</p>
-                                <p className='cart__item-quantity'>$  {item.price}</p>
-                            </div>
+                            <button className='cart__item cart__item-remove' onClick={()=>removeItem(item.id,quantity)}>X</button>
+                            <span className='cart__item'> Cant: {quantity}</span>
                             <span className='cart__item'>$ {quantity * item.price}</span>                            
+                            <span className='cart__item'>$  {item.price}</span>
+                            
                         </li>
                     )
                 })}

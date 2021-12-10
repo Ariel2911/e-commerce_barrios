@@ -7,7 +7,7 @@
     display: block;
     margin-top: 24px;
     opacity: 1;
-    border-top: 2px solid var(--ligth-blue);
+    border-top: 2px solid var(--primari-color-ligth);
 }
 
 .reservationForm__container{
@@ -17,7 +17,7 @@
 .reservationForm__input{
     border: 1px solid var(--bottom-color);
     border-radius: 4px;
-    background-color: var(--ligth-blue);
+    background-color: var(--primari-color-ligth);
 }
 
 .reservationForm__label{

@@ -42,7 +42,7 @@ const ItemCount=({ stock, initial, onAdd }) => {
                 <span className='count__number'>{count}</span>
                 <button className='count__button' onClick={Increase}>+</button>
             </div> 
-            <button className='count__button' onClick={addCart}>Agregar al carrito </button>  
+            <button className='count__buttonAdd' onClick={addCart}>Agregar </button>  
             <p >Stock didponible: {availableStock<0 ? availableStock-initial : availableStock}</p>      
         </article>
     )
