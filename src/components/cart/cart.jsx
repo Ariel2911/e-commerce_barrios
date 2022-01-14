@@ -46,8 +46,8 @@ const Cart =()=>{
                             <span className='cart__item'>{item.name}</span>
                             <button className='cart__item cart__item-remove' onClick={()=>removeItem(item.id,quantity)}>X</button>
                             <span className='cart__item'> Cant: {quantity}</span>
-                            <span className='cart__item'>$ {quantity * item.price}</span>                            
                             <span className='cart__item'>$  {item.price}</span>
+                            <span className='cart__item'>$ {quantity * item.price}</span>                            
                             
                         </li>
                     )

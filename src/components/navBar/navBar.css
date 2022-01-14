@@ -7,7 +7,7 @@
     align-items: center;
     padding: 0 10px;
 
-    background-color: var(--primari-color);  
+    background-color: var(--primari-color-ligth);  
 }
 
 .menu{
@@ -25,7 +25,7 @@
     background-color: var(--text-color);
     color: var(--primari-color);
 
-    opacity: 0.9;  
+    opacity: 0.92;  
     transform: translateX(-100vh);  
     transition: transform 1s ;
 }

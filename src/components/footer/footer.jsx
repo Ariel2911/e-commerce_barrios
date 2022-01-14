@@ -11,7 +11,7 @@ const Footer = ()=>{
                 <img src={insttagram} className='img' alt="Icono de instagram" />
                 <img src={twitter} className='img' alt="Icono de twitter" />
             </div>
-            <p>Desarrollado por: Ariel Barrios</p>
+            <small>Desarrollado por: Ariel Barrios</small>
         </div>
     )
 };
